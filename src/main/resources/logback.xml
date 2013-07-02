@@ -6,7 +6,7 @@
     </encoder>
   </appender>
 
-  <logger name="akkapatterns" level="debug" additivity="false">
+  <logger name="com.typesafe.training.akka.patterns" level="debug" additivity="false">
     <appender-ref ref="console" />
   </logger>
 

@@ -1,7 +1,7 @@
-package akkapatterns
+package com.typesafe.training.akka.patterns
 
 import akka.actor._
-import ActorSystems._
+import com.typesafe.training.akka.common.ActorSystems._
 import akka.actor.ActorDSL._
 import java.util.concurrent.atomic.AtomicInteger
 import scala.concurrent.duration._
@@ -69,7 +69,6 @@ object ThrottlingExample extends App {
   val producer = applicationSystem.actorOf(Props[ProducerActor].withDispatcher("akka.actor.limited-dispatcher"))
 
   1 to 10 foreach (producer ! _)
-
   Console.readLine("finish?")
 
   shutdown()

@@ -1,4 +1,4 @@
-package akkapatterns
+package com.typesafe.training.akka.patterns
 
 import akka.actor._
 

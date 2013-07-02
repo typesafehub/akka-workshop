@@ -1,4 +1,4 @@
-package akkapatterns
+package com.typesafe.training.akka.common
 
 import com.typesafe.config.Config
 import akka.actor._
@@ -7,8 +7,10 @@ import scala.concurrent.duration._
 import java.util.concurrent.{ ConcurrentHashMap, ConcurrentLinkedQueue }
 import java.util
 import akka.agent.Agent
-import scala.Some
 import com.typesafe.config.ConfigFactory
+
+import ActorSystems._
+import scala.Option.option2Iterable
 
 object ActorSystems {
   val systemUtils = ActorSystem("system-utils", ConfigFactory.load.getConfig("akka.system-utils"))
@@ -20,19 +22,17 @@ object ActorSystems {
   }
 }
 
-import ActorSystems._
-
 class TrackingMailboxType(systemSettings: ActorSystem.Settings, config: Config)
     extends MailboxType {
 
   override def create(owner: Option[ActorRef],
     system: Option[ActorSystem]): MessageQueue =
     (owner zip system) headOption match {
-      case Some((o, s: ExtendedActorSystem)) ⇒
+      case Some((o, s: ExtendedActorSystem)) =>
         val mailbox = new TrackingMailbox(s)
         TrackingMailboxExtension(s).register(o, mailbox)
         mailbox
-      case _ ⇒
+      case _ =>
         throw new IllegalArgumentException("requires an owner " +
           "(i.e. does not work with BalancingDispatcher)")
     }
@@ -84,8 +84,8 @@ class TrackingboxExtension(val system: ExtendedActorSystem) extends Extension {
 
   def mailboxSize(implicit context: ActorContext): Int =
     mailboxes.get(context.self) match {
-      case null ⇒ throw new IllegalArgumentException("Mailbox not registered for: " + context.self)
-      case mailbox ⇒ mailbox.mailboxSize
+      case null => throw new IllegalArgumentException("Mailbox not registered for: " + context.self)
+      case mailbox => mailbox.mailboxSize
     }
 }
 

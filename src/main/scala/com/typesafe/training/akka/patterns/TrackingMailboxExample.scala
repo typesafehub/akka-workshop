@@ -1,8 +1,9 @@
-package akkapatterns
+package com.typesafe.training.akka.patterns
 
 import akka.actor._
 import scala.concurrent.duration._
 
+import com.typesafe.training.akka.common._
 import ActorSystems._
 
 object TrackingMailboxExample extends App {

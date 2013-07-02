@@ -1,7 +1,8 @@
-package akkapatterns
+package com.typesafe.training.akka.patterns
 
 import akka.actor._
 import com.typesafe.config.ConfigFactory
+import scala.collection.mutable.Queue
 
 object PullWorkerExample extends App {
 

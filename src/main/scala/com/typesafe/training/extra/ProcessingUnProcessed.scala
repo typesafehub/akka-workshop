@@ -1,4 +1,4 @@
-package akkapatterns
+package com.typesafe.training.extra
 
 import akka.actor.{ Props, ActorSystem, Actor, ActorLogging }
 

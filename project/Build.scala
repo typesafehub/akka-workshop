@@ -27,6 +27,7 @@ object Build extends Build {
         Dependency.Compile.akkaSlf4j,
         Dependency.Compile.logbackClassic,
         Dependency.Test.akkaTestkit,
+        Dependency.Compile.akkaCluster,
         Dependency.Test.scalaTest
       ),
       retrieveManaged := true
@@ -38,8 +39,8 @@ object Build extends Build {
     scalariformSettings
 
   object Version {
-    val scala = "2.10.1"
-    val akka = "2.1.2"
+    val scala = "2.10.2"
+    val akka = "2.1.4"
   }
 
   object Dependency {
@@ -49,6 +50,7 @@ object Build extends Build {
       val akkaSlf4j = "com.typesafe.akka" %% "akka-slf4j" % Version.akka
       val akkaAgent = "com.typesafe.akka" %% "akka-agent" % Version.akka
       val akkaRemote = "com.typesafe.akka" %% "akka-remote" % Version.akka
+      val akkaCluster = "com.typesafe.akka" %% "akka-cluster-experimental" % Version.akka
       val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.0.9"
     }
 

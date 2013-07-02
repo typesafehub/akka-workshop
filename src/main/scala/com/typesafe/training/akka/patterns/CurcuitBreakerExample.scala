@@ -1,13 +1,12 @@
-package akkapatterns
+package com.typesafe.training.akka.patterns
 
 import akka.actor._
 import akka.actor.ActorDSL._
 import akka.pattern._
-import akka.util.Timeout
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.util.{ Try, Success, Failure }
+import scala.util.{ Success, Failure }
 
 object CircuitBreakerExample extends App {
 
