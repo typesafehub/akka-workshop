@@ -31,7 +31,7 @@ object GracefulStopExample extends App {
   ref.ask(20).onSuccess {
     case r =>
       system.log.info("Waiting for all the messages to be processed")
-      gracefulStop(ref, 10.second)(system).onSuccess { case _ => system.shutdown() }
+      gracefulStop(ref, 10.second).onSuccess { case _ => system.shutdown() }
   }
 
   30 to 35 foreach (ref ! _)

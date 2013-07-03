@@ -40,7 +40,7 @@ object Build extends Build {
 
   object Version {
     val scala = "2.10.2"
-    val akka = "2.1.4"
+    val akka = "2.2.0-RC2"
   }
 
   object Dependency {
@@ -50,7 +50,7 @@ object Build extends Build {
       val akkaSlf4j = "com.typesafe.akka" %% "akka-slf4j" % Version.akka
       val akkaAgent = "com.typesafe.akka" %% "akka-agent" % Version.akka
       val akkaRemote = "com.typesafe.akka" %% "akka-remote" % Version.akka
-      val akkaCluster = "com.typesafe.akka" %% "akka-cluster-experimental" % Version.akka
+      val akkaCluster = "com.typesafe.akka" %% "akka-cluster" % Version.akka
       val logbackClassic = "ch.qos.logback" % "logback-classic" % "1.0.9"
     }
 

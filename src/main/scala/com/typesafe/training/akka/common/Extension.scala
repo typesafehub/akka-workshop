@@ -38,9 +38,9 @@ class TrackingMailboxType(systemSettings: ActorSystem.Settings, config: Config)
     }
 }
 
-class TrackingMailbox(_system: ExtendedActorSystem) extends ConcurrentLinkedQueue[Envelope] with QueueBasedMessageQueue with UnboundedMessageQueueSemantics {
+class TrackingMailbox(_system: ExtendedActorSystem) extends ConcurrentLinkedQueue[Envelope] with UnboundedQueueBasedMessageQueue with UnboundedMessageQueueSemantics {
 
-  private val tracker = Agent(0)(systemUtils)
+  private val tracker = Agent(0)(systemUtils.dispatcher)
 
   final def queue: util.Queue[Envelope] = this
 
@@ -58,7 +58,6 @@ class TrackingMailbox(_system: ExtendedActorSystem) extends ConcurrentLinkedQueu
 
   //called when mailbox is disposed
   override def cleanUp(owner: ActorRef, deadLetters: MessageQueue): Unit = {
-    tracker.close()
     TrackingMailboxExtension(_system).unregister(owner)
     super.cleanUp(owner, deadLetters)
   }

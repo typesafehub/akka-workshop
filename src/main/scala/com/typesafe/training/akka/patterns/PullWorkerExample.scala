@@ -44,19 +44,24 @@ object PullWorkerExample extends App {
     }
   }
 
-  class Worker(masterPath: String) extends Actor with ActorLogging {
+  class Worker(masterPath: String, workerId: Int) extends Actor with ActorLogging {
 
-    val master = context.system.actorFor(masterPath)
+    var master: Option[ActorRef] = None
 
-    override def preStart = master ! WorkerJoining(self)
+    override def preStart = {
+      context.system.actorSelection(masterPath) ! Identify(workerId)
+    }
 
     def receive = {
+      case ActorIdentity(`workerId`, Some(ref)) =>
+        master = Some(ref)
+        master.foreach(_ ! WorkerJoining(self))
       case Work(payload) =>
         log.info("working on the playload {}", payload)
         if (payload.toString == "blow") throw new RuntimeException("Boom")
         log.info("Work is done by {}", self.path.name)
         sender ! WorkDone("Work is done by " + self.path.name)
-        master ! IAmIdle(self)
+        master.foreach(_ ! IAmIdle(self))
     }
   }
 
@@ -68,8 +73,8 @@ object PullWorkerExample extends App {
   val remoteSystem1 = ActorSystem("remote1", mainConfig.getConfig("remote1"))
   val remoteSystem2 = ActorSystem("remote2", mainConfig.getConfig("remote2"))
 
-  remoteSystem1.actorOf(Props(new Worker("akka://master@127.0.0.1:2553/user/master")), name = "workerA")
-  remoteSystem2.actorOf(Props(new Worker("akka://master@127.0.0.1:2553/user/master")), name = "workerB")
+  remoteSystem1.actorOf(Props(new Worker("akka.tcp://master@127.0.0.1:2553/user/master", 1)), name = "workerA")
+  remoteSystem2.actorOf(Props(new Worker("akka.tcp://master@127.0.0.1:2553/user/master", 2)), name = "workerB")
 
   Console.readLine("Start?")
 
