@@ -40,7 +40,7 @@ object Build extends Build {
 
   object Version {
     val scala = "2.10.2"
-    val akka = "2.2.0-RC2"
+    val akka = "2.2.0"
   }
 
   object Dependency {
