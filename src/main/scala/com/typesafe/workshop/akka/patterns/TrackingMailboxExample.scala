@@ -1,4 +1,4 @@
-package com.typesafe.training.akka.patterns
+package com.typesafe.workshop.akka.patterns
 
 import akka.actor._
 import scala.concurrent.duration._
