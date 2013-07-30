@@ -1,0 +1,60 @@
+/**
+ * A simple theme for reveal.js presentations, similar
+ * to the default theme. The accent color is darkblue.
+ *
+ * This theme is Copyright (C) 2012 Owen Versteeg, https://github.com/StereotypicalApps. It is MIT licensed.
+ * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(http://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Serif|Source+Sans+Pro:100,300,400,700,900);
+
+
+$blue: #7bdcf5;
+$darkBlue: #103a51;
+$red: #ee6768;
+$main: #627886;
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont: 'Source Sans Pro', sans-serif;
+$mainColor: $main;
+$headingFont: 'Open Sans', sans-serif;
+$headingColor: $red;
+$headingTextShadow: 2px 2px 0 rgba(0,0,0,.1);;
+$headingTextTransform: none;
+$backgroundColor: #fff;
+$linkColor: $darkBlue;
+$linkColorHover: $linkColor;
+$selectionBackgroundColor: rgba(0, 0, 0, 0.99);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+	font-weight: 700;
+}
+
+section[data-state], section[data-background] {
+	h1, h2, h3, h4, p {
+		color: white !important;
+	}
+	h1, h2, h3, h4 {
+		text-shadow: 2px 2px 0 rgba(0,0,0,.3);
+	}
+}
+
+

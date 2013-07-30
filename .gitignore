@@ -15,4 +15,8 @@ dist
 /RUNNING_PID
 /.settings
 /bin
-/lib_managed
+patterns/lib_managed
+patterns/.classpath
+patterns/.project
+patterns/.settings
+cluster-patterns/lib_managed
